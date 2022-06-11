@@ -35,7 +35,7 @@ h3 {
   @apply text-base;
 }
 a {
-  @apply text-lightText hover:text-bgDark hover:dark:text-bgLight transition-colors duration-500;
+  @apply text-bgLight hover:text-bgDark hover:dark:text-bgLight transition-colors duration-500;
 }
 
 * {
@@ -53,7 +53,7 @@ ul {
   top: 50%;
   height: 1px;
   width: 100vw;
-  @apply bg-lightText;
+  @apply bg-bgLight;
 }
 
 html {
