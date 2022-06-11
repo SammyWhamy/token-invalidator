@@ -4,10 +4,10 @@ import { info } from "../../data/config"
 
 export default async function handler(req, res) {
     const params = new URLSearchParams({
-        client_id: process.env.CLIENT_ID,
+        client_id: process.env.NEXT_PUBLIC_CLIENT_ID,
         code: req.query.code,
         client_secret: process.env.CLIENT_SECRET,
-        redirect_uri: process.env.REDIRECT_URI,
+        redirect_uri: process.env.NEXT_PUBLIC_REDIRECT_URL,
         grant_type: 'authorization_code',
         scope: info.scopes.join(" ")
     });
