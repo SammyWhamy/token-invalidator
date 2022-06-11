@@ -10,7 +10,7 @@ export default function TextInput({ data }) {
         <div>
             <form className="flex items-center relative">
                 <input
-                    className='placeholder:text-white text-white focus:border-purple-500 active:border-purple-500 w-full form-input px-4 py-3 rounded-md bg-transparent border border-white/30 focus:outline-none'
+                    className='placeholder:text-grey-700 focus:border-purple-500 active:border-purple-500 w-full form-input px-4 py-3 rounded-full bg-white border border-white/30 focus:outline-none'
                     type='password'
                     placeholder={data ? "Enter the token to invalidate here..." : "Log in with Discord!"}
                     maxLength={70}
@@ -20,7 +20,7 @@ export default function TextInput({ data }) {
                     disabled={!data}
                 />
                 <button
-                    className='font-semibold rounded-full absolute right-0 px-5 py-3 text-xs font-bold mr-3 text-white bg-bgDark focus:outline-none'
+                    className='font-semibold rounded-full absolute right-0 px-5 py-3 text-xs font-bold mr-2 text-white bg-bgDark focus:outline-none'
                     onClick={TokenInvalidator}
                     disabled={!data}
                 >
