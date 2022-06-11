@@ -2,13 +2,14 @@ import Form from '../components/Form';
 import Head from 'next/head'
 import jwt from 'jsonwebtoken';
 import * as cookie from 'cookie';
-
+import { info } from "../data/config"
+const { JWT_SECRET } = info.fuckNext
 export async function getServerSideProps(ctx) {
   let key = null;
   try {
     const cookies = cookie.parse(ctx.req.headers.cookie);
     const user = cookies.token;
-    key = jwt.verify(user, process.env.JWT_SECRET)
+    key = jwt.verify(user, JWT_SECRET)
   } catch {
     key = null;
   }
