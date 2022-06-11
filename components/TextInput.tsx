@@ -17,9 +17,13 @@ export default function TextInput({ data }) {
                     minLength={20}
                     value={input}
                     onChange={i => setInput(i.target.value)}
-                    disabled
+                    disabled={!data}
                 />
-                <button className='font-semibold rounded-full absolute right-0 px-5 py-3 text-xs font-bold mr-3 text-white bg-bgDark focus:outline-none' onClick={TokenInvalidator}>
+                <button
+                    className='font-semibold rounded-full absolute right-0 px-5 py-3 text-xs font-bold mr-3 text-white bg-bgDark focus:outline-none'
+                    onClick={TokenInvalidator}
+                    disabled={!data}
+                >
                     Invalidate
                 </button>
             </form>
