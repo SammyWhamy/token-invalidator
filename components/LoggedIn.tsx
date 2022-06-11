@@ -10,7 +10,7 @@ export default function LoggedIn({data}) {
                     alt={data?.username}
                     style={{ borderRadius: '50%', position: 'relative', textAlign: 'center' }}/>
                 <span>
-                    {data?.username}
+                    {data ? `${data.username}#${data.discriminator}` : ""}
                 </span>
             </button>
         </Link>
