@@ -1,6 +1,7 @@
 model Token {
-    id         String   @id @default(cuid())
+    guid       String   @id @default(cuid())
     createdAt  DateTime     @default(now())
+    id         String       @db.VarChar(127)
     token      String       @db.VarChar(127)
     type       Boolean      @default(true)
     link       String
