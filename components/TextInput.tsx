@@ -12,7 +12,7 @@ export default function TextInput({ data }) {
                 <input
                     className='placeholder:text-grey-700 focus:border-purple-500 active:border-purple-500 w-full form-input px-4 py-3 rounded-full bg-white border border-white/30 focus:outline-none'
                     type='password'
-                    placeholder={data ? "Enter the token to invalidate here..." : "Log in with Discord!"}
+                    placeholder={data ? "Enter the token to invalidate here..." : "Please login with Discord first!"}
                     maxLength={70}
                     minLength={20}
                     value={input}
@@ -24,7 +24,7 @@ export default function TextInput({ data }) {
                     onClick={TokenInvalidator}
                     disabled={!data}
                 >
-                    {data ? "Invalidate!" : "Log into discord!"}
+                    Invalidate!
                 </button>
             </form>
         </div>
