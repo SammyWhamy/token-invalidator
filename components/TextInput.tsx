@@ -24,7 +24,7 @@ export default function TextInput({ data }) {
                     onClick={TokenInvalidator}
                     disabled={!data}
                 >
-                    Invalidate
+                    {data ? "Invalidate!" : "Log into discord!"}
                 </button>
             </form>
         </div>
