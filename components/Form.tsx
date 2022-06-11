@@ -5,7 +5,7 @@ import LoginButton from "./LoginButton";
 
 export default function Form({ data }) {
     return (
-        <div className='h-screen relative bg-gradient-to-br from-green-700 to-red-500 overflow-hidden'>
+        <div className='h-screen relative bg-gradient-to-br from-blue-101 to-fuchsia-101 overflow-hidden'>
 
             <div className='w-11/12 md:w-3/6 2xl:w-2/6 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 backdrop-blur-10px bg-white/30 rounded-lg md:p-20 p-10'>
                 {data ? (<LoggedIn data={data} />) : (<LoginButton/>)}
