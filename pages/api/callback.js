@@ -1,13 +1,15 @@
 import Cookies from 'cookies';
 import jwt from 'jsonwebtoken';
 import { info } from "../../data/config"
+
 export default async (req, res) => {
+  const { CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, JWT_SECRET } = info.fuckNext
   const code = req.query.code;
   const params = new URLSearchParams({
-    client_id: process.env.CLIENT_ID,
+    client_id: CLIENT_ID,
     code,
-    client_secret: process.env.CLIENT_SECRET,
-    redirect_uri: process.env.CLIENT_SECRET,
+    client_secret: CLIENT_SECRET,
+    redirect_uri: REDIRECT_URI,
     grant_type: 'authorization_code',
     scope: info.scopes.join(" ")
   })
@@ -23,7 +25,7 @@ export default async (req, res) => {
       Authorization: `Bearer ${token}`
     }
   })).json())
-  const user = jwt.sign(userinfo, process.env.JWT_SECRET);
+  const user = jwt.sign(userinfo, JWT_SECRET);
   const cookie = new Cookies(req, res);
   cookie.set('token', user, {
     httpOnly: false
