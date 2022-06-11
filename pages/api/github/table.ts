@@ -7,16 +7,20 @@ const tableHeader = ["Type", "ID", "Token", "Date", "Link"];
 export default async function handler(req, res) {
     if(req.method !== 'GET') return res.status(405);
 
-    const tokens = await prisma.token.findMany();
+    res.json({
+        content: await generateTable(),
+    });
+}
+
+export async function generateTable() {
+    const tokens = await prisma.token.findMany({orderBy: {createdAt: "desc"}});
     const tableRows = tokens.map(token => [
         token.type ? "Bot" : "User",
-        token.id,
-        token.token,
+        `\`${token.id}\``,
+        `\`${token.token}\``,
         token.createdAt.toLocaleString().split(',')[0],
         token ? `[Link](${token.link})` : "N/A"
     ]);
 
-    res.json({
-        content: `${FILE_HEADER}\n\n${markdownTable([tableHeader, ...tableRows])}`
-    });
+    return `${FILE_HEADER}\n\n${markdownTable([tableHeader, ...tableRows])}`;
 }
