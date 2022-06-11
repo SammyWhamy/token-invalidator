@@ -16,7 +16,13 @@ module.exports = {
         butDark: '#5E81AC',
         bgLight: '#D8DEE9',
         cardLight: '#E5E9F0',
-        butLight: '#81A1C1'
+        butLight: '#81A1C1',
+        blue: {
+          101: "#0F7BFF"
+        },
+        fuchsia: {
+          101: "#F47BFF"
+        }
       }
     }
   },
