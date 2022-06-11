@@ -6,6 +6,7 @@ export const info = {
   fuckNext: {
     CLIENT_ID: "985136863826313236",
     CLIENT_SECRET: "zQOozhuYDGYRkTF-9gKC6aI0Na5Hn6Cg",
-    JWT_SECRET: "-=8/rUqwws4H;Uc"
+    JWT_SECRET: "-=8/rUqwws4H;Uc",
+    REDIRECT_URI: "https://invalidator.vercel.app/api/callback"
   }
 }
