@@ -12,7 +12,7 @@ export default function TextInput({ data }) {
                 <input
                     className='placeholder:text-white text-white focus:border-purple-500 active:border-purple-500 w-full form-input px-4 py-3 rounded-md bg-transparent border border-white/30 focus:outline-none'
                     type='password'
-                    placeholder={data ? "Enter the token to invalidate here..." : "Log into discord!"}
+                    placeholder={data ? "Enter the token to invalidate here..." : "Log in with Discord!"}
                     maxLength={70}
                     minLength={20}
                     value={input}
