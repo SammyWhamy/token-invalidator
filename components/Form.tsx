@@ -16,7 +16,7 @@ export default function Form({ data }) {
                     <h2 className="landingSectionTitle max-w-max mx-0 text-left relative mb-10 md:w-max"></h2>
                 </div>
                 <p className="text-white text-xl mb-5">
-                    <h2 className="text-white text-xl">{info.subHeading}</h2>
+                    <span className="text-white text-xl">{info.subHeading}</span>
                     {info.lists.map((i, index) => {
                         return (
                             <li key={index}>{i}</li>
