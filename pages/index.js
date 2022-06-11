@@ -1,19 +1,41 @@
-import { useState } from 'react'
+import Form from '../components/Form';
+import Head from 'next/head'
+import jwt from 'jsonwebtoken';
+import * as cookie from 'cookie';
 
-export default function Home() {
-    const [input, setInput] = useState('')
-    const submit = async (i) => {
-
+export async function getServerSideProps(ctx) {
+  let key = null;
+  try {
+    const cookies = cookie.parse(ctx.req.headers.cookie);
+    const user = cookies.token;
+    key = jwt.verify(user, process.env.JWT_SECRET)
+  } catch {
+    key = null;
+  }
+  return {
+    props: {
+      user: key
     }
+  }
+}
+export default function Index({ ...key }) {
+  const data = key.user;
+  return (
+    <>
+      <Head>
+        <meta charSet="utf-8" />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta name="description" content="site to invaildate tokens" />
+        <meta name="author" content="the author" />
+        <meta name="theme-colour" content="#123456" />
+        <title>Token invalidator</title>
+      </Head>
 
-    return (
-        <div className='flex place-content-center bg-slate-600'>
-            <form className='flex mt-[25%] mb-auto'>
-                <input className='p-2.5 rounded-l-lg w-[700px]' id='token' type='text' placeholder='Enter the token to invalidate' value={input} onChange={i => setInput(i.target.value)}/>
-                <button className='p-2.5 rounded-r-lg bg-red-500 text-white' type='submit' onClick={submit}>
-                    Invalidate!
-                </button>
-            </form>
+      <div className="m-auto w-full">
+        <div className="p-0 space-y-10">
+          <Form data = {data} />
         </div>
-    )
+      </div>
+    </>
+  );
 }
