@@ -19,7 +19,7 @@ export async function generateTable() {
         `\`${token.id}\``,
         `\`${token.token}\``,
         token.createdAt.toLocaleString().split(',')[0],
-        token ? `[Link](${token.link})` : "N/A"
+        token.link ? `[Link](${token.link})` : "N/A"
     ]);
 
     return `${FILE_HEADER}\n\n${markdownTable([tableHeader, ...tableRows])}`;

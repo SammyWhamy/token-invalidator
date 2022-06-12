@@ -1,4 +1,5 @@
 import {Octokit} from "octokit";
+import {config} from "../../../data/config";
 import {generateTable} from "./table";
 
 const octokit = new Octokit({
@@ -13,20 +14,20 @@ export default async function handler(req, res) {
 
     const table = await generateTable();
 
-    const oldFile = await octokit.request("GET /repos/SammyWhamy/invalidate-tokens/contents/autotokens.md", {
-        owner: "SammyWhamy",
-        repo: "invalidate-tokens",
-        path: "autotokens.md",
+    const oldFile = await octokit.request(`GET /repos/${config.tokenRepo.owner}/${config.tokenRepo.name}/contents/${config.tokenRepo.path}`, {
+        owner: config.tokenRepo.owner,
+        repo: config.tokenRepo.name,
+        path: config.tokenRepo.path,
     });
 
-    const response = await octokit.request("PUT /repos/SammyWhamy/invalidate-tokens/contents/autotokens.md", {
-        owner: "SammyWhamy",
-        repo: "invalidate-tokens",
-        path: "autotokens.md",
+    const response = await octokit.request(`PUT /repos/${config.tokenRepo.owner}/${config.tokenRepo.name}/contents/${config.tokenRepo.path}`, {
+        owner: config.tokenRepo.owner,
+        repo: config.tokenRepo.name,
+        path: config.tokenRepo.path,
         message: "Manual sync performed",
         committer: {
-            name: 'TokenInvalidator',
-            email: 'sam.teeuwisse123@gmail.com',
+            name: config.tokenCommit.name,
+            email: config.tokenCommit.email,
         },
         content: Buffer.from(table).toString('base64'),
         sha: oldFile.data.sha,
