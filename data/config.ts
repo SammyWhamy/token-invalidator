@@ -10,7 +10,7 @@ export const config = {
             url: "https://github.com/SammyWhamy/token-invalidator"
         },
         {
-            label: "Token repo",
+            label: "Token repository",
             url: "https://github.com/SammyWhamy/invalidate-tokens"
         },
         // {
