@@ -12,7 +12,7 @@ const octokit = new Octokit({
 export default async function handler(req, res) {
     if(req.method !== 'POST') return res.status(405);
 
-    const auth = await authenticate(req.headers['authorization']);
+    const auth = await authenticate(req.headers['authorization'], req.headers['x-submitted-by']);
 
     if(auth.success == false)
         return res.status(401).json({error: `Unauthenticated: ${auth.error}`});
