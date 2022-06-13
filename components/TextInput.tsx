@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const linkRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z\d@:%._+~#=]{1,256}\.[a-zA-Z\d()]{1,6}\b[-a-zA-Z\d()@:%_+.~#?&\/=]*$/;
+
 export default function TextInput({ data }) {
     const [token, setToken] = useState('');
     const [link, setLink] = useState('');
@@ -8,7 +10,7 @@ export default function TextInput({ data }) {
     const TokenInvalidator = async (i) => {
         i.preventDefault();
 
-        if(link && !link.trim().match(/^https?:\/\/(?:www\.)?[-a-zA-Z\d@:%._+~#=]{1,256}\.[a-zA-Z\d()]{1,6}\b[-a-zA-Z\d()@:%_+.~#?&\/=]*$/)) {
+        if(link && !link.trim().match(linkRegex)) {
             setLink('');
             return alert('Invalid link')
         }
