@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
 export default function TextInput({ data }) {
-    const [token, setToken] = useState('')
-    const [link, setLink] = useState('')
+    const [token, setToken] = useState('');
+    const [link, setLink] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const TokenInvalidator = async (i) => {
         i.preventDefault();
@@ -12,10 +13,7 @@ export default function TextInput({ data }) {
             return alert('Invalid link')
         }
 
-        console.log({
-            token: token.trim(),
-            link: link.trim(),
-        })
+        setLoading(true);
 
         const res = await fetch('/api/tokens/submit', {
             method: 'POST',
@@ -41,6 +39,7 @@ export default function TextInput({ data }) {
 
         setToken('');
         setLink('');
+        setLoading(false);
         return alert('Token invalidated.');
     }
 
@@ -69,9 +68,9 @@ export default function TextInput({ data }) {
                 />
                 <button
                     className='font-semibold rounded-full absolute right-0 px-5 py-3 mt-2 text-xs font-bold mr-2 text-white bg-bgDark focus:outline-none'
-                    disabled={!data}
+                    disabled={!data ? true : (loading)}
                 >
-                    Invalidate!
+                    {loading ? "Invalidating..." : "Invalidate!"}
                 </button>
             </form>
         </div>
