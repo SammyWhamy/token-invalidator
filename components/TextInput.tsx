@@ -8,7 +8,7 @@ export default function TextInput({ data }) {
     const TokenInvalidator = async (i) => {
         i.preventDefault();
 
-        if(!link.trim().match(/^https?:\/\/(?:www\.)?[-a-zA-Z\d@:%._+~#=]{1,256}\.[a-zA-Z\d()]{1,6}\b[-a-zA-Z\d()@:%_+.~#?&\/=]*$/)) {
+        if(link && !link.trim().match(/^https?:\/\/(?:www\.)?[-a-zA-Z\d@:%._+~#=]{1,256}\.[a-zA-Z\d()]{1,6}\b[-a-zA-Z\d()@:%_+.~#?&\/=]*$/)) {
             setLink('');
             return alert('Invalid link')
         }
