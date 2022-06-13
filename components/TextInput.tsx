@@ -52,8 +52,6 @@ export default function TextInput({ data }) {
                     className="placeholder:text-grey-700 focus:border-purple-500 active:border-purple-500 w-full form-input px-4 py-3 rounded-t-3xl bg-white border border-white/30 focus:outline-none"
                     type='text'
                     placeholder={data ? "Enter the link where you found the token..." : "Please login with Discord first!"}
-                    maxLength={70}
-                    minLength={20}
                     value={link}
                     onChange={i => setLink(i.target.value)}
                     disabled={!data}
