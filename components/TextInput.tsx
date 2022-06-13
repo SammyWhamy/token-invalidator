@@ -67,7 +67,10 @@ export default function TextInput({ data }) {
                     onChange={i => setToken(i.target.value)}
                     disabled={!data}
                 />
-                <button className='font-semibold rounded-full absolute right-0 px-5 py-3 mt-2 text-xs font-bold mr-2 text-white bg-bgDark focus:outline-none'>
+                <button
+                    className='font-semibold rounded-full absolute right-0 px-5 py-3 mt-2 text-xs font-bold mr-2 text-white bg-bgDark focus:outline-none'
+                    disabled={!data}
+                >
                     Invalidate!
                 </button>
             </form>
