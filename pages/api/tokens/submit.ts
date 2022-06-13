@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
     const exists = await prisma.token.findFirst({where: {token: token}});
     if(exists)
-        return res.status(400).json({ error: 'Token already exists' });
+        return res.status(400).json({ error: 'Token has already been submitted' });
 
     const tokenType = await validateToken(token);
     if(!tokenType.valid)
