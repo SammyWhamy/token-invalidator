@@ -25,13 +25,15 @@ export default function TextInput({ data }) {
                 token: token.trim(),
                 link: link.trim(),
             })
-        });
+        }).catch(() => null);
 
-        if(res.status !== 200) {
-            const json = await res.json().catch(() => null);
-            if(!json)
+        if(res?.status !== 200) {
+            const json = await res?.json().catch(() => null);
+            if(!json) {
+                setLoading(false);
                 return alert('Something went wrong. Please try again.');
-            else {
+            } else {
+                setLoading(false);
                 setToken('');
                 return alert(json.error);
             }
