@@ -1,10 +1,10 @@
 import Link from 'next/link';
-import { info } from "../data/config";
+import { config } from "../data/config";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 export default function LoginButton() {
-    const link = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}&response_type=code&scope=${info.scopes.join(" ")}`;
+    const link = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}&response_type=code&scope=${config.scopes.join(" ")}`;
 
     return (
         <Link href={link}>

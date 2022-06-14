@@ -1,5 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import {Octokit} from "octokit";
+import {config} from "../../../data/config";
+import {authenticate} from "../../../util/authenticate";
 import {generateTable} from "../github/table";
 const prisma = new PrismaClient();
 
@@ -10,13 +12,15 @@ const octokit = new Octokit({
 export default async function handler(req, res) {
     if(req.method !== 'POST') return res.status(405);
 
-    if(req.headers['authorization'] !== `Bearer ${process.env.API_TOKEN}`)
-        return res.status(401).json({ error: 'Invalid token' })
+    const auth = await authenticate(req.headers['authorization'], req.headers['x-submitted-by']);
 
-    const { token, link, submitter } = req.body;
+    if(auth.success == false)
+        return res.status(401).json({error: `Unauthenticated: ${auth.error}`});
 
-    if(!token || !link)
-        return res.status(400).json({ error: 'Missing token or link' })
+    const { token, link } = req.body;
+
+    if(!token)
+        return res.status(400).json({ error: 'Missing token' })
 
     const exists = await prisma.token.findFirst({where: {token: token}});
     if(exists)
@@ -27,28 +31,33 @@ export default async function handler(req, res) {
         return res.status(400).json({ error: 'Invalid token' });
 
     const idPart = token.split('.')[0];
-    const id = Buffer.from(idPart, 'base64').toString('ascii');
 
     const createdToken = await prisma.token.create({
-        data: {id, token, link, submitter, type: tokenType.type}
+        data: {
+            id: Buffer.from(idPart, 'base64').toString('ascii'),
+            token: token,
+            link: link || "N/A",
+            submitter: auth.submitter,
+            type: true// tokenType.type
+        }
     });
 
     const table = await generateTable();
 
-    const oldFile = await octokit.request("GET /repos/SammyWhamy/invalidate-tokens/contents/autotokens.md", {
-        owner: "SammyWhamy",
-        repo: "invalidate-tokens",
-        path: "autotokens.md",
+    const oldFile = await octokit.request(`GET /repos/${config.tokenRepo.owner}/${config.tokenRepo.name}/contents/${config.tokenRepo.path}`, {
+        owner: config.tokenRepo.owner,
+        repo: config.tokenRepo.name,
+        path: config.tokenRepo.path,
     });
 
-    await octokit.request("PUT /repos/SammyWhamy/invalidate-tokens/contents/autotokens.md", {
-        owner: "SammyWhamy",
-        repo: "invalidate-tokens",
-        path: "autotokens.md",
-        message: `Token added by ${submitter}`,
+    await octokit.request(`PUT /repos/${config.tokenRepo.owner}/${config.tokenRepo.name}/contents/${config.tokenRepo.path}`, {
+        owner: config.tokenRepo.owner,
+        repo: config.tokenRepo.name,
+        path: config.tokenRepo.path,
+        message: config.tokenCommit.message.replace("{submitter}", auth.submitter),
         committer: {
-            name: 'TokenInvalidator',
-            email: 'sam.teeuwisse123@gmail.com',
+            name: config.tokenCommit.name,
+            email: config.tokenCommit.email,
         },
         content: Buffer.from(table).toString('base64'),
         sha: oldFile.data.sha,
