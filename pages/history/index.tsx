@@ -20,7 +20,7 @@ function History() {
             </Head>
             <div className='h-screen w-screen fixed bg-gradient-to-br from-blue-101 to-fuchsia-101 overflow-auto'>
                 <div className='max-w-[60%] rounded-3xl m-5 w-5/6 mx-auto backdrop-blur-10px bg-white/30 backdrop-opacity-xl rounded-3xl'>
-                    <div className="fixed text-white my-[0.7rem] mx-6 cursor-pointer">
+                    <div className="float-left text-white my-[0.7rem] mx-6 cursor-pointer">
                         <Link href="/">
                             <FontAwesomeIcon icon={faHouse} size="2x"/>
                         </Link>
