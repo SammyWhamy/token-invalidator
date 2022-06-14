@@ -73,7 +73,7 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                                                             ) : key == "token" ? (
                                                                 <div className="flex-initial flex items-center group relative cursor-pointer">
                                                                     {token.id}
-                                                                    <div className="absolute text-sm hidden group-hover:block left-28 bg-gray-300 px-2 py-2 rounded-3xl z-50">
+                                                                    <div className="absolute text-sm hidden group-hover:block hover:animate-slide left-28 bg-gray-300 px-2 py-2 rounded-3xl z-50">
                                                                         {token.token}
                                                                     </div>
                                                                 </div>
