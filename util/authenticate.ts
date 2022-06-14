@@ -10,7 +10,7 @@ interface FailedAuthResult {
 
 type AuthResult = SuccessfulAuthResult | FailedAuthResult;
 
-export async function authenticate(token?: string): Promise<AuthResult> {
+export async function authenticate(token?: string, submitter?: string): Promise<AuthResult> {
     if(!token)
         return {success: false, error: "Missing token"};
 
@@ -18,7 +18,7 @@ export async function authenticate(token?: string): Promise<AuthResult> {
 
     if(type === "Bot") {
         if(key === process.env.API_TOKEN)
-            return {success: true, submitter: "985202712964661289"};
+            return {success: true, submitter: submitter || "985202712964661289"};
         else
             return {success: false, error: "Invalid bot token"};
     } else if(type === "Bearer") {

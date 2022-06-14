@@ -25,13 +25,11 @@ export default async function handler(req, res) {
         }
     })).json());
 
+    if(user?.code === 0)
+        return res.redirect('../../');
+
     const cookie = new Cookies(req, res);
-
-    cookie.set('token', jwt.sign(token, process.env.JWT_SECRET), {
-        httpOnly: false,
-    });
-
-    cookie.set('user', jwt.sign(user, process.env.JWT_SECRET), {
+    cookie.set('user', jwt.sign({...user, token}, process.env.JWT_SECRET), {
         httpOnly: false
     });
 

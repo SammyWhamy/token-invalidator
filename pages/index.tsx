@@ -4,19 +4,14 @@ import jwt from 'jsonwebtoken';
 import cookie from 'cookie';
 
 export async function getServerSideProps(ctx) {
-    let userData, token;
+    const props: any = {};
 
     try {
         const cookies = cookie.parse(ctx.req.headers.cookie);
-        userData = jwt.verify(cookies.user, process.env.JWT_SECRET)
-        token = jwt.verify(cookies.token, process.env.JWT_SECRET)
+        props.user = jwt.verify(cookies.user, process.env.JWT_SECRET)
     } catch {}
 
-    return {
-        props: {
-            user: userData ? {...userData, token} : null,
-        }
-    };
+    return {props};
 }
 
 export default function Index({ ...key }) {
