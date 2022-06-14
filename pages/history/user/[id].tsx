@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import {useRouter} from "next/router";
 import useSWR from 'swr'
-import Table from '../../components/Table';
+import Table from '../../../components/Table';
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
 export default function GetUser() {
