@@ -26,6 +26,7 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
     return (
         <div>
             <table className="max-w-[60%] rounded-3xl m-5 w-5/6 mx-auto backdrop-blur-10px bg-white/30 backdrop-opacity-xl rounded-3xl">
+                <thead>
                 <tr className="text-center border-b-2 border-gray-300 rounded-b-3xl">
                     {["type", "id (hover for token)", "submitted at", "submitter", "link"].map((i, ind) => {
                         return (
@@ -46,15 +47,17 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                         )
                     })}
                 </tr>
+                </thead>
 
+                <tbody>
                 {tokenData
                     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
                     .map((token) => {
-                    return (
-                        <tr className="rounded-b-3xl" key={token.guid}>
-                            {["type", "token", "createdAt", "submitter", "link"].map((key) => {
-                                return (
-                                    <td className="px-4 py-3" key={key}>
+                        return (
+                            <tr className="rounded-b-3xl" key={token.guid}>
+                                {["type", "token", "createdAt", "submitter", "link"].map((key) => {
+                                    return (
+                                        <td className="px-4 py-3" key={key}>
                                         <span className="block text-center m-auto">
                                             <div className="whitespace-nowrap relative inline-block px-3 py-1 font-semibold text-black leading-tight">
                                                 <div className="relative inline-block px-3 py-1 font-semibold text-black leading-tight">
@@ -88,12 +91,13 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                                                 </div>
                                             </div>
                                         </span>
-                                    </td>
+                                        </td>
+                                    )}
                                 )}
-                            )}
-                        </tr>
-                    )
-                })}
+                            </tr>
+                        )
+                    })}
+                </tbody>
             </table>
         </div>
     )
