@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import Table from '../../../components/Table';
 import Loading from '../../../components/Loading'
 import Error from '../../../components/Error'
+import EmptyTable from '../../../components/EmptyTable'
 
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
@@ -16,6 +17,7 @@ export default function GetUser() {
     const { error, data } = useSWR(id ? `/api/tokens/user/${id}` : null, fetcher);
     if (error) return <Error error = {"Couldn't fetch details properly"}/>
     if (!data) return <Loading />
+    if (data.length < 1) return <EmptyTable id = {id}/>
     return (
         <>
             <Head>
