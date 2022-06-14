@@ -79,7 +79,7 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                                                             ) : key == "type" ? (
                                                                 token.type ? "Bot" : "User"
                                                             ) : key == "submitter" ? (
-                                                                token.submitter
+                                                                <Link href={`/history/user/${token.submitter}`}>token.submitter</Link>
                                                             ) : (
                                                                 "N/A"
                                                             )}
