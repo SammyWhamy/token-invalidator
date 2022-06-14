@@ -17,7 +17,7 @@ export default function Error({error}) {
                 </div>
                 <span className="text-white text-xl"><li>{error}</li></span>
                 <div className="text-white text-xl mb-5">
-                    {[{label: "Go to the home page", url: "/"}, {label: "Open a github issue if you think this was unexpected!"}].map((i, index) => {
+                    {[{label: "Go to the home page", url: "/"}, {label: "Open a github issue if you think this was unexpected!", url: "https://github.com/SammyWhamy/token-invalidator/issues/new"}].map((i, index) => {
                         return (
                             <li key={index}><Link href = {i.url || "/"}>{i.label}</Link></li>
                         )
