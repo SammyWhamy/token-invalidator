@@ -1,13 +1,15 @@
 import Head from 'next/head'
 import useSWR from 'swr'
 import Table from '../../components/Table';
+import Loading from '../../../components/Loading'
+import Error from '../../../components/Error'
 
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
 function History() {
     const { data, error } = useSWR('/api/tokens', fetcher)
-    if (error) return <div>Failed to load</div>
-    if (!data) return <div>Loading...</div>
+    if (error) return <Error error = {"Couldnt fetch details properly"}/>
+    if (!data) return <Loading />
     return (
         <>
             <Head>
