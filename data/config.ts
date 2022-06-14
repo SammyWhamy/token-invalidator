@@ -13,6 +13,10 @@ export const config = {
             label: "Token repo",
             url: "https://github.com/SammyWhamy/invalidate-tokens"
         },
+        {
+          label: "History",
+          url: "/history"
+        }
         // {
         //     label: "Contact us"
         // },
