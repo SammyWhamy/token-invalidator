@@ -14,7 +14,7 @@ export const config = {
             url: "https://github.com/SammyWhamy/invalidate-tokens"
         },
         {
-          label: "History",
+          label: "Submission history",
           url: "/history"
         }
         // {
