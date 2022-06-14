@@ -18,7 +18,7 @@ export default function GetUser() {
             <div className='h-screen w-screen fixed bg-gradient-to-br from-blue-101 to-fuchsia-101 overflow-auto'>
                 <div className='rounded-3xl m-5 w-5/6 mx-auto backdrop-blur-10px bg-white/30 backdrop-opacity-xl rounded-3xl'>
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        YOUR Token History
+                        {`${id}'s Token History`}
                     </h1>
                 </div>
                 <Table tokenData={data} />
