@@ -11,7 +11,7 @@ export default function GetUser() {
     const router = useRouter();
     const { id } = router.query;
     const { error, data } = useSWR(id ? `/api/tokens/user/${id}` : null, fetcher);
-    if (error) return <Error error = {"Couldnt fetch details properly"}/>
+    if (error) return <Error error = {"Couldn't fetch details properly"}/>
     if (!data) return <Loading />
     return (
         <>
