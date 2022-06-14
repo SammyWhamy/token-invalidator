@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import useSWR from 'swr'
 import Table from '../../components/Table';
-import Loading from '../../../components/Loading'
-import Error from '../../../components/Error'
+import Loading from '../../components/Loading'
+import Error from '../../components/Error'
 
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
