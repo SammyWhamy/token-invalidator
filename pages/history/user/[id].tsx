@@ -2,14 +2,17 @@ import Head from 'next/head'
 import {useRouter} from "next/router";
 import useSWR from 'swr'
 import Table from '../../../components/Table';
+import Loading from '../../../components/Loading'
+import Error from '../../../components/Error'
+
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
 export default function GetUser() {
     const router = useRouter();
     const { id } = router.query;
-    const { error, data } = useSWR(id ? `https://token-invalidator.vercel.app/api/tokens/user/${id}` : null, fetcher);
-    if (error) return <div>Failed to load</div>
-    if (!data) return <div>Loading...</div>
+    const { error, data } = useSWR(id ? `/api/tokens/user/${id}` : null, fetcher);
+    if (error) return <Error error = {"Couldnt fetch details properly"}/>
+    if (!data) return <Loading />
     return (
         <>
             <Head>
