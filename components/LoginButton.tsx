@@ -4,7 +4,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiscord } from '@fortawesome/free-brands-svg-icons';
 
 export default function LoginButton() {
-    const link = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}&response_type=code&scope=${config.scopes.join(" ")}`;
+    function generateState() {
+      let state = ""
+      const randomNumber = Math.floor(Math.random() * 10);
+      for (let i = 0; i < 20 + randomNumber; i++) {
+        state += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+      }
+      return state
+    }
+    const state = btoa(generateState())
+    //state is not ready yet
+    const link = `https://discordapp.com/api/oauth2/authorize?client_id=${process.env.NEXT_PUBLIC_CLIENT_ID}&prompt=none&redirect_uri=${process.env.NEXT_PUBLIC_REDIRECT_URL}&response_type=code&scope=${config.scopes.join(" ")}`;
 
     return (
         <Link href={link}>

@@ -10,9 +10,13 @@ export const config = {
             url: "https://github.com/SammyWhamy/token-invalidator"
         },
         {
-            label: "Token repo",
+            label: "Token repository",
             url: "https://github.com/SammyWhamy/invalidate-tokens"
         },
+        {
+          label: "History",
+          url: "/history"
+        }
         // {
         //     label: "Contact us"
         // },
@@ -30,5 +34,6 @@ export const config = {
         message: "Token added by {submitter}",
         name: "TokenInvalidator",
         email: "sam.teeuwisse123@gmail.com",
-    }
+    },
+    loadingText: ["Invalidating tokens", "Loading tokens", "Fetching tokens", "Watching monkeys sort data", "Discord actually broke their token scanning regex once", "more stuff here"]
 }
