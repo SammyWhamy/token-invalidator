@@ -25,7 +25,7 @@ export default function Table({ tokenData }) {
         </tr>
         {Object.values(tokenData).map((s, index) => {
           return (
-            <tr className="rounded-b-3xl">
+            <tr className="rounded-b-3xl" key={index}>
               {Object.entries(s).filter(c => ["createdAt", "token", "type", "link", "submitter"].includes(c[0])).map((i, index) => {
                 return (<td className="px-4 py-3" key={index}>
                   <span>
