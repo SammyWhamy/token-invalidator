@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import 'vercel-toast/dist/vercel-toast.css'
+import { createToast } from 'vercel-toast'
 
 const linkRegex = /^https?:\/\/(?:www\.)?[-a-zA-Z\d@:%._+~#=]{1,256}\.[a-zA-Z\d()]{1,6}\b[-a-zA-Z\d()@:%_+.~#?&\/=]*$/;
 
@@ -12,7 +14,11 @@ export default function TextInput({ data }) {
 
         if(link && !link.trim().match(linkRegex)) {
             setLink('');
-            return alert('Invalid link')
+            createToast("Please enter a valid link, or leave blank if you don't have one", {
+                type: "warning",
+                timeout: 5000
+            });
+            return;
         }
 
         setLoading(true);
@@ -33,18 +39,34 @@ export default function TextInput({ data }) {
             const json = await res?.json().catch(() => null);
             if(!json) {
                 setLoading(false);
-                return alert('Something went wrong. Please try again.');
+                const el = document.createElement('div');
+                el.innerHTML = "An error occurred while submitting your token.<br/>If this keeps happening <a href='https://github.com/SammyWhamy/token-invalidator/issues/new'>open an issue on GitHub!<a/>";
+                createToast(el, {
+                    type: "error",
+                    timeout: 5000
+                });
+                return;
             } else {
                 setLoading(false);
                 setToken('');
-                return alert(json.error);
+                createToast(json.error, {
+                    type: "error",
+                    timeout: 5000
+                });
+                return;
             }
         }
 
         setToken('');
         setLink('');
         setLoading(false);
-        return alert('Token invalidated.');
+
+        createToast("Token submitted successfully!", {
+            type: "success",
+            timeout: 5000
+        });
+
+        return;
     }
 
     return (
