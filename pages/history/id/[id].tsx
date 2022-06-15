@@ -1,16 +1,19 @@
 import {faHouse} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import Head from 'next/head'
-import Link from "next/link";
+import Link from "next/link.js";
+import {useRouter} from "next/router";
 import useSWR from 'swr'
-import Table from '../../components/Table';
-import Loading from '../../components/Loading'
-import Error from '../../components/Error'
+import Table from '../../../components/Table';
+import Loading from '../../../components/Loading'
+import Error from '../../../components/Error'
 
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
-function History() {
-    const { data, error } = useSWR('/api/tokens', fetcher)
+export default function GetUser() {
+    const router = useRouter();
+    const { id } = router.query;
+    const { error, data } = useSWR(id ? `/api/tokens/${id}` : null, fetcher);
     if (error) return <Error error = {"Couldn't fetch details properly"}/>
     if (!data) return <Loading />
     return (
@@ -27,13 +30,11 @@ function History() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        Token History - {data.length} Tokens
+                        {`${id}'s Leaked Tokens`}  - {data.length} Tokens
                     </h1>
                 </div>
                 <Table tokenData={data} />
             </div>
-
         </>
     );
 }
-export default History

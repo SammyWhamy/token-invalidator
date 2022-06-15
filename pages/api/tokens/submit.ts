@@ -57,7 +57,7 @@ export default async function handler(req, res) {
         message: config.tokenCommit.message.replace("{submitter}", auth.submitter),
         committer: {
             name: config.tokenCommit.name,
-            email: config.tokenCommit.email,
+            email: process.env.COMMIT_EMAIL,
         },
         content: Buffer.from(table).toString('base64'),
         sha: oldFile.data.sha,

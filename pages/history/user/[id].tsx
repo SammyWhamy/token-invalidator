@@ -32,7 +32,7 @@ export default function GetUser() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        {`${id}'s Token History`}
+                        {`${id}'s Token History`} - {data.length} Tokens
                     </h1>
                 </div>
                 <Table tokenData={data} />
