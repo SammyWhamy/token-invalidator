@@ -30,7 +30,6 @@ export const config = {
     tokenCommit: {
         message: "Token added by {submitter}",
         name: "TokenInvalidator",
-        email: "sam.teeuwisse123@gmail.com",
     },
     loadingText: [
         "Invalidating tokens",

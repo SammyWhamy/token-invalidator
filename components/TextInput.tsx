@@ -61,7 +61,9 @@ export default function TextInput({ data }) {
         setLink('');
         setLoading(false);
 
-        createToast("Token submitted successfully!", {
+        const el = document.createElement('span');
+        el.innerHTML = 'Token submitted successfully<br/>View the token <a href="/history">here</a>. Please make sure the token was invalidated, if not, <a href="https://github.com/SammyWhamy/token-invalidator/issues/new">open an issue on GitHub!<a/>';
+        createToast(el, {
             type: "success",
             timeout: 5000
         });
