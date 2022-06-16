@@ -17,7 +17,7 @@ export interface Token {
 
 export default function Table({tokenData}: {tokenData: Token[]}) {
     const tokens = tokenData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "PROFILE", "SUBMITTED AT", "SUBMITTER", "LINK"];
+    const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "HISTORY", "SUBMITTED AT", "SUBMITTER", "LINK"];
 
     return (
         <div>
