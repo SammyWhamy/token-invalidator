@@ -38,7 +38,7 @@ export default async function handler(req, res) {
             token: token,
             link: link || "N/A",
             submitter: auth.submitter,
-            type: true// tokenType.type
+            type: tokenType.type
         }
     });
 
