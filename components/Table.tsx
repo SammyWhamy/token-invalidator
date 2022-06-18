@@ -3,6 +3,7 @@ import TableLink from "./TableFields/TableLink";
 import TableSubmitter from "./TableFields/TableSubmitter";
 import TableToken from "./TableFields/TableToken";
 import TableType from "./TableFields/TableType";
+import TableUrl from "./TableFields/TableUrl";
 
 export interface Token {
     guid: string,
@@ -16,7 +17,7 @@ export interface Token {
 
 export default function Table({tokenData}: {tokenData: Token[]}) {
     const tokens = tokenData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-    const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "SUBMITTED AT", "SUBMITTER", "LINK"];
+    const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "HISTORY", "SUBMITTED AT", "SUBMITTER", "LINK"];
 
     return (
         <div>
@@ -36,6 +37,7 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                     <tr className="rounded-b-3xl" key={token.guid}>
                         <TableType token={token} />
                         <TableToken token={token} />
+                        <TableUrl token={token} />
                         <TableDate token={token} />
                         <TableSubmitter token={token} />
                         <TableLink token={token} />
