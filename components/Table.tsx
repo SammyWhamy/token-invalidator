@@ -16,7 +16,6 @@ export interface Token {
 }
 
 export default function Table({tokenData}: {tokenData: Token[]}) {
-    const tokens = tokenData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
     const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "HISTORY", "SUBMITTED AT", "SUBMITTER", "LINK"];
 
     return (
@@ -33,7 +32,7 @@ export default function Table({tokenData}: {tokenData: Token[]}) {
                 </thead>
 
                 <tbody>
-                {tokens.map((token) => (
+                {tokenData.map((token) => (
                     <tr className="rounded-b-3xl" key={token.guid}>
                         <TableType token={token} />
                         <TableToken token={token} />
