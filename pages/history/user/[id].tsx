@@ -22,7 +22,8 @@ export default function GetUser() {
         token: 'OTgwMTU5NTg0MDI5MjUzNzI0.GKzXAv._N58c3c04xx3Z7TtSwMyAixm_kTnluyyritc8Q',
         type: true,
         link: 'https://replit.com/@aabdllhlSlHy',
-        submitter: '560821786011369472'
+        submitter: '560821786011369472',
+        id: '560821786011369472'
     })
     if (!data) return <Loading />
     if (data.length < 1) return <EmptyTable id = {id}/>
