@@ -1,3 +1,17 @@
+model Token {
+    guid       String   @id @default(cuid())
+    createdAt  DateTime     @default(now())
+    id         String       @db.VarChar(127)
+    token      String       @db.VarChar(127)
+    type       Boolean      @default(true)
+    link       String?
+    submitter  String
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
