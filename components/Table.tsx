@@ -16,12 +16,12 @@ export interface Token {
 }
 
 export default function Table({tokenData}: {tokenData: Token[]}) {
-    const tokens = tokenData.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    const tokens = tokenData
     const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "HISTORY", "SUBMITTED AT", "SUBMITTER", "LINK"];
 
     return (
-        <div>
-            <table className="max-w-[60%] rounded-3xl m-5 w-5/6 mx-auto backdrop-blur-10px bg-white/30 backdrop-opacity-xl rounded-3xl">
+        <div className = "max-h-[80%] overflow-y-scroll rounded-3xl m-5 w-5/6 mx-auto backdrop-blur-10px bg-gray-700/30 backdrop-opacity-xl rounded-3xl">
+            <table>
                 <thead>
                 <tr className="text-center border-b-2 border-gray-300 rounded-b-3xl">
                     {headers.map(name => (
