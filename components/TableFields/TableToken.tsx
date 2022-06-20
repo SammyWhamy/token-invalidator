@@ -2,8 +2,11 @@ import 'vercel-toast/dist/vercel-toast.css'
 import {createToast} from "vercel-toast";
 import {Token} from "../Table";
 import TableContainer from "./TableContainer";
+import Profile from "../Profile"
+import { useState } from "react"
 
 export default function TableToken({ token }: { token: Token }) {
+    const [visibleProfile, setVisibleProfile] = useState(false);
     const idClick = async () => {
         createToast("Copied ID to clipboard", {
             type: "success",
@@ -14,11 +17,9 @@ export default function TableToken({ token }: { token: Token }) {
 
     return (
         <TableContainer color="bg-gray-200">
-            <div className="flex-initial flex items-center group relative cursor-pointer" onClick={idClick}>
+            <div className="flex-initial flex items-center group relative cursor-pointer" onClick={idClick} onMouseEnter={() => setVisibleProfile(true)} onMouseLeave={() => setVisibleProfile(false)}>
                 {token.id}
-                <div className="absolute text-sm hidden group-hover:block animate-slide left-28 bg-gray-300 px-2 py-2 rounded-3xl z-50">
-                    {token.token}
-                </div>
+                {visibleProfile ? (<Profile data = {{id: token.id, token: token.token}}/>) : ""}
             </div>
         </TableContainer>
     )
