@@ -17,6 +17,7 @@ module.exports = {
                 bgLight: '#D8DEE9',
                 cardLight: '#E5E9F0',
                 butLight: '#81A1C1',
+                discordDark: '#1E1E23',
                 blue: {
                     101: '#0F7BFF'
                 },
