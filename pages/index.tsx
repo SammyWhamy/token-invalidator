@@ -22,7 +22,7 @@ export default function Index({ ...key }) {
             <Head>
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
-                <meta name="description" content="site to invaildate tokens" />
+                <meta name="description" content="site to invalidate tokens" />
                 <meta name="author" content="the author" />
                 <meta name="theme-colour" content="#123456" />
                 <title>Token invalidator</title>
