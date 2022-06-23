@@ -13,17 +13,11 @@ const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.
 export default function GetUser() {
     const router = useRouter();
     const { id } = router.query;
-    //const { error, data } = useSWR(id ? `/api/tokens/${id}` : null, fetcher);
-    //if (error) return <Error error = {"Couldn't fetch details properly"}/>
-    const data = Array(100).fill({
-        guid: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-        createdAt: '2022-06-12T17:47:32.541Z',
-        token: 'OTgwMTU5NTg0MDI5MjUzNzI0.GKzXAv._N58c3c04xx3Z7TtSwMyAixm_kTnluyyritc8Q',
-        type: true,
-        link: 'https://replit.com/@aabdllhlSlHy',
-        submitter: '560821786011369472',
-        id: '560821786011369472'
-    })
+    const { error, data } = useSWR(id ? `/api/tokens/${id}` : null, fetcher);
+    const { data: countData, error: countError } = useSWR('/api/tokens/count', fetcher);
+
+    if (error || countError) return <Error error = {"Couldn't fetch details properly"}/>
+
     if (!data) return <Loading />
     return (
         <>
@@ -39,7 +33,7 @@ export default function GetUser() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        {`${id}'s Leaked Tokens`}  - {data.length} Tokens
+                        {`${id}'s Leaked Tokens`}  - {countData.count} Tokens
                     </h1>
                 </div>
                 <Table tokenData={data} />

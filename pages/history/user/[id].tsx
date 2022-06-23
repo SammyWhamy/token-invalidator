@@ -15,7 +15,9 @@ export default function GetUser() {
     const router = useRouter();
     const { id } = router.query;
     const { error, data } = useSWR(id ? `/api/tokens/user/${id}` : null, fetcher);
-    if (error) return <Error error = {"Couldn't fetch details properly"}/>
+    const { data: countData, error: countError } = useSWR('/api/tokens/count', fetcher);
+
+    if (error || countError) return <Error error = {"Couldn't fetch details properly"}/>
 
     if (!data) return <Loading />
     if (data.length < 1) return <EmptyTable id = {id}/>
@@ -33,7 +35,7 @@ export default function GetUser() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        {`${id}'s Token History`} - {data.length} Tokens
+                        {`${id}'s Token History`} - {countData.count} Tokens
                     </h1>
                 </div>
                 <Table tokenData={data} />

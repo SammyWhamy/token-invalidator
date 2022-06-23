@@ -10,8 +10,10 @@ import Error from '../../components/Error'
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
 function History() {
-    const { data, error } = useSWR('/api/tokens', fetcher)
-    if (error) return <Error error = {"Couldn't fetch details properly"}/>
+    const { data, error } = useSWR('/api/tokens', fetcher);
+    const { data: countData, error: countError } = useSWR('/api/tokens/count', fetcher);
+
+    if (error || countError) return <Error error = {"Couldn't fetch details properly"}/>
 
     if (!data) return <Loading />
     return (
@@ -28,7 +30,7 @@ function History() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        Token History - {data.length} Tokens
+                        Token History - {countData.count} Tokens
                     </h1>
                 </div>
                 <Table tokenData={data} />
