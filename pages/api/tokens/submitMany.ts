@@ -39,6 +39,9 @@ export default async function handler(req, res) {
         }
     }))).filter((token) => token != null);
 
+    if(mappedTokens.length == 0)
+        return res.status(400).json({ error: 'No valid tokens' });
+
     const createdToken = await prisma.token.createMany({
         data: mappedTokens,
         skipDuplicates: true
