@@ -25,6 +25,7 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "swr": "^1.3.0",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "vercel-toast": "^1.5.5"
   },
   "devDependencies": {

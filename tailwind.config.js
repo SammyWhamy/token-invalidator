@@ -37,7 +37,7 @@ module.exports = {
                 spinner: {
                   '0%': {
                     transform: 'rotate(0turn)'
-                  }, 
+                  },
                   '100%': {
                     transform: 'rotate(1turn)'
                   }
@@ -54,5 +54,7 @@ module.exports = {
             after
         }) => after(["disabled"]),
     },
-    plugins: []
+    plugins: [
+        require('tailwind-scrollbar-hide')
+    ]
 };

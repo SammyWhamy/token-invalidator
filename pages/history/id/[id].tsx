@@ -13,12 +13,16 @@ const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.
 export default function GetUser() {
     const router = useRouter();
     const { id } = router.query;
-    const { error, data } = useSWR(id ? `/api/tokens/${id}` : null, fetcher);
+    const page = router.query.page ? parseInt(router.query.page as string) - 1 : 0;
+    if (page < 0)
+        router.push(`/history/user/${id}`);
+
+    const { error, data } = useSWR(id ? `/api/tokens/${id}?skip=${page * 100}&take=${100}` : null, fetcher);
     const { data: countData, error: countError } = useSWR('/api/tokens/count', fetcher);
 
     if (error || countError) return <Error error = {"Couldn't fetch details properly"}/>
+    if (!data || !countData ) return <Loading />
 
-    if (!data) return <Loading />
     return (
         <>
             <Head>
@@ -36,7 +40,7 @@ export default function GetUser() {
                         {`${id}'s Leaked Tokens`}  - {countData.count} Tokens
                     </h1>
                 </div>
-                <Table tokenData={data} />
+                <Table tokenData={data} page={page} baseURL={`/history/id/${id}`} />
             </div>
         </>
     );
