@@ -13,8 +13,8 @@ export default function Profile({ data }) {
     }
 
     return (
-        <div className="fixed z-40 grid justify-items-center transform translate-x-[5rem] translate-y-[10rem]">
-            <div className="w-[30rem] bg-discordDark pb-5 rounded-3xl">
+        <div className="relative z-50 -translate-x-[5rem]">
+            <div className="absolute w-[30rem] bg-discordDark pb-5 rounded-3xl">
                 <img src={`https://url.wtf/api/banners/user/${id}`} alt={id} className="rounded-3xl"/>
 
                 {token ? (
