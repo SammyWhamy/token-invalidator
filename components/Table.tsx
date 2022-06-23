@@ -16,7 +16,6 @@ export interface Token {
 }
 
 export default function Table({tokenData}: {tokenData: Token[]}) {
-    const tokens = tokenData
     const headers = ["TYPE", "ID (HOVER FOR TOKEN)", "HISTORY", "SUBMITTED AT", "SUBMITTER", "LINK"];
 
     return (

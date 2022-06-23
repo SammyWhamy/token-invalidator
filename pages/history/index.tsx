@@ -10,17 +10,9 @@ import Error from '../../components/Error'
 const fetcher = (...args: [string, ...any]) => fetch(...args).then((res) => res.json())
 
 function History() {
-    //const { data, error } = useSWR('/api/tokens', fetcher)
-    //if (error) return <Error error = {"Couldn't fetch details properly"}/>
-    const data = Array(100).fill({
-        guid: Math.random().toString(36).replace(/[^a-z]+/g, '').substr(0, 5),
-        createdAt: '2022-06-12T17:47:32.541Z',
-        token: 'OTgwMTU5NTg0MDI5MjUzNzI0.GKzXAv._N58c3c04xx3Z7TtSwMyAixm_kTnluyyritc8Q',
-        type: true,
-        link: 'https://replit.com/@aabdllhlSlHy',
-        submitter: '560821786011369472',
-        id: '560821786011369472'
-    })
+    const { data, error } = useSWR('/api/tokens', fetcher)
+    if (error) return <Error error = {"Couldn't fetch details properly"}/>
+
     if (!data) return <Loading />
     return (
         <>
