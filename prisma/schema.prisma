@@ -2,7 +2,7 @@ model Token {
     guid       String   @id @default(cuid())
     createdAt  DateTime     @default(now())
     id         String       @db.VarChar(127)
-    token      String       @db.VarChar(127)
+    token      String       @db.VarChar(127) @unique
     type       Boolean      @default(true)
     link       String?
     submitter  String
