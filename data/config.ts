@@ -29,6 +29,7 @@ export const config = {
     },
     tokenCommit: {
         message: "Token added by {submitter}",
+        manyMessage: "{count} tokens added by {submitter}",
         name: "TokenInvalidator",
     },
     loadingText: [
