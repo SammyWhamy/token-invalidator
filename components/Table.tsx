@@ -49,13 +49,13 @@ export default function Table({tokenData, page, baseURL}: {tokenData: Token[], p
             </table>
 
             <div className='min-w-[100%] rounded-b-3xl mx-auto backdrop-blur-10px bg-white/30 backdrop-opacity-xl'>
-                <div className="float-left ml-[20rem] text-white my-[0.7rem] mx-6 cursor-pointer">
+                <div className="float-left ml-[20rem] text-white mt-[0.7rem] mx-6 cursor-pointer">
                     <Link href={page === 0 ? baseURL : `${baseURL}?page=${page}`}>
                         <FontAwesomeIcon icon={faArrowLeft} size="2x"/>
                     </Link>
                 </div>
 
-                <div className="float-right mr-[20rem] text-white my-[0.7rem] mx-6 cursor-pointer">
+                <div className="float-right mr-[20rem] text-white mt-[0.7rem] mx-6 cursor-pointer">
                     <Link href={page === 0 ? `${baseURL}?page=2` : `${baseURL}?page=${page+2}`}>
                         <FontAwesomeIcon icon={faArrowRight} size="2x"/>
                     </Link>
