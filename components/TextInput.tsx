@@ -94,7 +94,7 @@ export default function TextInput({ data }) {
                         disabled={!data}
                     />
                     <button
-                        className='font-semibold rounded-full absolute right-0 px-5 py-3 mt-2 text-xs font-bold mr-2 text-white bg-bgDark focus:outline-none'
+                        className='font-semibold rounded-full absolute right-0 px-6 py-2 text-xs font-bold mr-2 mt-1 text-white bg-bgDark focus:outline-none'
                         disabled={!data ? true : (loading)}
                     >
                         {loading ? "Invalidating..." : "Invalidate!"}
