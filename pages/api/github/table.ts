@@ -12,19 +12,20 @@ export default async function handler(req, res) {
 
 export async function generateTable() {
     const tokenIds = await prisma.token.findMany({
-        orderBy: { createdAt: "asc" },
+        orderBy: { guid: "desc" },
         select: { id: true },
         distinct: ["id"],
     });
 
     const tokens = await prisma.token.findMany({
-        orderBy: { createdAt: "asc" },
+        orderBy: { guid: "desc" },
         select: { token: true },
         take: 500,
     });
 
-    const idList = tokenIds.map((token, index) => `${index+1}. [${token.id}](https://invalidate.vercel.app/history?id=${token.id})`).join("\n");
+    const header = `>#### ${tokenIds.length} tokens submitted!\n`;
+    const idList = tokenIds.map(token => `- [${token.id}](https://invalidate.vercel.app/history?id=${token.id})`).join("\n");
     const tokenList = tokens.map(token => token.token).join("\n");
 
-    return `${FILE_HEADER}  \n${idList}\n  <!--\n${tokenList}\n-->`;
+    return `${FILE_HEADER}  \n${header}  \n${idList}\n  <!--\n${tokenList}\n-->`;
 }
