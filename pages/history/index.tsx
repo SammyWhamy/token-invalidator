@@ -37,7 +37,7 @@ function History() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        Token History - {countData.count} Tokens
+                        Token History - {countData.count} {countData.count === 1 ? "Token" : "Tokens"}
                     </h1>
                 </div>
                 <Table tokenData={data} page={page} baseURL="/history"/>

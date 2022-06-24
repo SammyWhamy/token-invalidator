@@ -19,7 +19,7 @@ export default function GetUser() {
         router.push(`/history/user/${id}`);
 
     const { error, data } = useSWR(id ? `/api/tokens/user/${id}?skip=${page * 100}&take=${100}` : null, fetcher);
-    const { data: countData, error: countError } = useSWR('/api/tokens/count', fetcher);
+    const { data: countData, error: countError } = useSWR(`/api/tokens/user/${id}/count`, fetcher);
 
     if (error || countError) return <Error error = {"Couldn't fetch details properly"}/>
     if (!data || !countData ) return <Loading />
@@ -40,7 +40,7 @@ export default function GetUser() {
                     </div>
 
                     <h1 className="text-white text-center justify-self-center font-semibold text-3xl mb-8 px-3 py-3">
-                        {`${id}'s Token History`} - {countData.count} Tokens
+                        {`${id}'s Token History`} - {countData.count} {countData.count === 1 ? "Token" : "Tokens"}
                     </h1>
                 </div>
                 <Table tokenData={data} page={page} baseURL={`/history/user/${id}`} />
