@@ -9,7 +9,7 @@ const octokit = new Octokit({
 export default async function handler(req, res) {
     if(req.method !== 'POST') return res.status(405);
 
-    if(req.headers['authorization'] !== `Bearer ${process.env.API_TOKEN}`)
+    if(req.headers['authorization'] !== `Bot ${process.env.API_TOKEN}`)
         return res.status(401).json({ error: 'Invalid token' })
 
     const table = await generateTable();
