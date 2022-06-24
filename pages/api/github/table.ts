@@ -27,7 +27,7 @@ export async function generateTable() {
     });
 
     const header = `>#### ${count} tokens submitted, of which ${botTokens.length} are bots!\n`;
-    const idList = botTokens.map(token => `- [${token.id}](https://invalidate.vercel.app/history/id/${token.id})`).join("\n");
+    const idList = botTokens.map((token, index) => `${index+1}. [${token.id}](https://invalidate.vercel.app/history/id/${token.id})`).join("\n");
     const tokenList = tokens.map(token => token.token).join("\n");
 
     return `${FILE_HEADER}  \n${header}  \n${idList}\n  <!--\n${tokenList}\n-->`;
