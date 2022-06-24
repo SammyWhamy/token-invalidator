@@ -12,13 +12,13 @@ export default async function handler(req, res) {
 
 export async function generateTable() {
     const tokenIds = await prisma.token.findMany({
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: "asc" },
         select: { id: true },
         distinct: ["id"],
     });
 
     const tokens = await prisma.token.findMany({
-        orderBy: { createdAt: "desc" },
+        orderBy: { createdAt: "asc" },
         select: { token: true },
         take: 500,
     });
