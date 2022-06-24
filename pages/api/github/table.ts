@@ -21,7 +21,7 @@ export async function generateTable() {
     });
 
     const tokens = await prisma.token.findMany({
-        orderBy: { guid: "asc" },
+        orderBy: { createdAt: "desc" },
         select: { token: true },
         take: 500,
     });
