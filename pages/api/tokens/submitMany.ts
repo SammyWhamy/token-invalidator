@@ -23,6 +23,9 @@ export default async function handler(req, res) {
     if(!tokens)
         return res.status(400).json({ error: 'Missing token array' });
 
+    if(tokens.length > 100)
+        return res.status(400).json({ error: 'Token array too long' });
+
     const mappedTokens = (await Promise.all(tokens.map(async (token) => {
         const tokenType = await validateToken(token);
         if(!tokenType.valid)
@@ -42,10 +45,13 @@ export default async function handler(req, res) {
     if(mappedTokens.length == 0)
         return res.status(400).json({ error: 'No valid tokens' });
 
-    const createdToken = await prisma.token.createMany({
+    const createdTokens = await prisma.token.createMany({
         data: mappedTokens,
         skipDuplicates: true
     });
+
+    if(createdTokens.count === 0)
+        return res.status(400).json({ error: 'No unique tokens' });
 
     const table = await generateTable();
 
@@ -59,7 +65,7 @@ export default async function handler(req, res) {
         owner: config.tokenRepo.owner,
         repo: config.tokenRepo.name,
         path: config.tokenRepo.path,
-        message: config.tokenCommit.manyMessage.replace("{submitter}", auth.submitter).replace("{count}", `${createdToken.count}`),
+        message: config.tokenCommit.manyMessage.replace("{submitter}", auth.submitter).replace("{count}", `${createdTokens.count}`),
         committer: {
             name: config.tokenCommit.name,
             email: process.env.COMMIT_EMAIL,
@@ -68,5 +74,5 @@ export default async function handler(req, res) {
         sha: oldFile.data.sha,
     });
 
-    return res.json(createdToken);
+    return res.json(createdTokens);
 }
