@@ -14,14 +14,14 @@ export async function generateTable() {
     const count = await prisma.token.count();
 
     const botTokens = await prisma.token.findMany({
-        orderBy: {guid: "desc" },
+        orderBy: {guid: "asc" },
         where: { type: true },
         select: { id: true },
         distinct: ["id"],
     });
 
     const tokens = await prisma.token.findMany({
-        orderBy: { guid: "desc" },
+        orderBy: { guid: "asc" },
         select: { token: true },
         take: 500,
     });
