@@ -20,11 +20,9 @@ export default function Form({ data }) {
                 </div>
                 <div className="text-white text-xl mb-5">
                     <span className="text-white text-xl">{config.subHeading}</span>
-                    {config.lists.map((i, index) => {
-                        return (
-                            <li key={index}><Link href = {i.url || "/"}>{i.label}</Link></li>
-                        )
-                    })}
+                    {config.lists.map((i, index) =>
+                        (<li key={index}><Link href = {i.url || "/"}>{i.label}</Link></li>)
+                    )}
                 </div>
                 <TextInput data={data} />
             </div>
